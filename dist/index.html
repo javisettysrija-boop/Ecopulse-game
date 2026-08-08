@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071b1a" />
+    <title>EcoPulse | The Last 60 Seconds</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <header class="game-header">
+        <div class="brand-lockup">
+          <p class="eyebrow">Ecopulse // Field Trial 01</p>
+          <h1>Eco <span>Pulse</span></h1>
+        </div>
+        <div class="status-readout" aria-label="Current pulse status">
+          <span class="status-dot"></span>
+          <span>Pulse stable</span>
+        </div>
+        <div class="audio-controls">
+          <button class="mute-button" id="mute-toggle" type="button" aria-label="Mute audio" aria-pressed="false">SOUND ON</button>
+          <label>Music <input id="music-volume" type="range" min="0" max="100" value="25" /></label>
+          <label>SFX <input id="sfx-volume" type="range" min="0" max="100" value="60" /></label>
+        </div>
+      </header>
+
+      <section class="game-stats" aria-label="Environmental status">
+        <div><span class="stat-label">SCORE</span><strong id="score">000000</strong></div>
+        <div><span class="stat-label">COMBO</span><strong id="combo">x0</strong><span class="multiplier" id="multiplier">x1</span></div>
+        <div class="stability-stat"><span class="stat-label">ENVIRONMENT</span><div class="stability-track"><span id="stability-bar"></span></div><strong id="stability">100%</strong></div>
+        <div><span class="stat-label">EMERGENCIES</span><strong><span id="solved-count">0</span>/10</strong></div>
+        <div class="difficulty-stat"><span class="stat-label">DIFFICULTY</span><strong id="difficulty-level">LEVEL 1 · CALM</strong></div>
+      </section>
+
+      <section class="game-frame" aria-label="EcoPulse playable game">
+        <canvas id="game-canvas" width="960" height="540" tabindex="0" aria-label="EcoPulse island map"></canvas>
+        <div class="warning-panel" id="warning-panel" aria-live="assertive" hidden>
+          <div class="warning-mark">⚠</div>
+          <p>Environmental emergency detected</p>
+          <span>Field systems are responding</span>
+        </div>
+        <div class="game-overlay" id="game-overlay">
+          <div class="menu-view" id="main-menu-view">
+            <p class="menu-mark">ECO<span>PULSE</span></p>
+            <h2>THE LAST<br><em>60 SECONDS</em></h2>
+            <p class="menu-subtitle">Protect. Decide. Restore.</p>
+            <div class="menu-actions">
+              <button id="start-button" type="button">Play</button>
+              <button class="ghost-button" id="how-to-play" type="button">How to play</button>
+              <button class="ghost-button" id="credits" type="button">Credits</button>
+            </div>
+          </div>
+          <div class="menu-view menu-subview" id="how-to-play-view" hidden>
+            <p class="menu-mark">FIELD GUIDE</p><h2>HOW TO PLAY</h2>
+            <div class="guide-list"><div><b>MOVE</b><span>WASD / ARROW KEYS</span></div><div><b>DIAGNOSE</b><span>Read the environmental clues.</span></div><div><b>RESPOND</b><span>Choose the correct solution.</span></div><div><b>PROTECT</b><span>Keep Environment Stability above 0%.</span></div></div>
+            <button class="ghost-button back-button" type="button">Back to menu</button>
+          </div>
+          <div class="menu-view menu-subview" id="credits-view" hidden>
+            <p class="menu-mark">ECO<span>PULSE</span></p><h2>FIELD TEAM</h2>
+            <p class="credits-copy">A student competition prototype about fast thinking, living systems, and the choices that keep a world in balance.</p>
+            <p class="credits-note">Built with HTML5 Canvas + JavaScript</p>
+            <button class="ghost-button back-button" type="button">Back to menu</button>
+          </div>
+        </div>
+        <div class="score-pop" id="score-pop" aria-live="polite"></div>
+        <div class="emergency-panel" id="emergency-panel" aria-live="assertive" aria-modal="true" role="dialog" hidden>
+          <div class="emergency-card">
+            <div class="emergency-heading">
+              <div><p class="emergency-kicker">🚨 Emergency alert</p><h2 id="emergency-name">FOREST FIRE</h2></div>
+              <div class="countdown"><span id="countdown">15</span><small>SEC</small></div>
+            </div>
+            <p class="diagnosis-prompt">AI diagnosis required. Read the field signals.</p>
+            <ul class="clue-list" id="clue-list"></ul>
+            <div class="response-grid" id="response-grid"></div>
+            <p class="decision-feedback" id="decision-feedback" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="end-panel" id="end-panel" aria-live="assertive" aria-modal="true" role="dialog" hidden>
+          <div class="end-card">
+            <p class="end-kicker" id="end-kicker">Field trial complete</p>
+            <h2 id="end-title">ENVIRONMENT SAVED!</h2>
+            <div class="results-grid">
+              <div><span>FINAL SCORE</span><strong id="final-score">000000</strong></div>
+              <div><span>EMERGENCIES SOLVED</span><strong id="final-solved">0</strong></div>
+              <div><span>ACCURACY</span><strong id="final-accuracy">0%</strong></div>
+              <div><span>HIGHEST COMBO</span><strong id="final-combo">x0</strong></div>
+              <div><span>ENVIRONMENT STABILITY</span><strong id="final-stability">100%</strong></div>
+            </div>
+            <div class="end-actions">
+              <button id="play-again" type="button">Play again</button>
+              <button class="secondary-button" id="main-menu" type="button">Main menu</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="game-footer">
+        <span><strong>WASD</strong> / <strong>ARROWS</strong> move</span>
+        <span class="coordinates" id="coordinates">SECTOR 04.12 / READY</span>
+      </footer>
+    </main>
+    <script type="module" src="./src/main.js?v=qa-final"></script>
+  </body>
+</html>
